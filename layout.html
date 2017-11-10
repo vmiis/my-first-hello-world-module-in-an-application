@@ -1,0 +1,460 @@
+<div top-right-corner id=top_right_corner__ID class='d-none d-lg-block'>
+	<span id=database_p__ID><span style='color:green'>&#11044; </span>Connected to a private database<br></span>
+	<span id=database_d__ID><span style='color:red'>&#11044; </span>Connected to a public database<br></span>
+	<span id=username__ID></span>
+	<script>
+		if($vm.server=='development') $('#database_d__ID').show();
+		else if($vm.server=='production') $('#database_p__ID').show();
+	</script>
+	<style>
+		#top_right_corner__ID{
+			display:block;
+			position:fixed;
+			top:3px;
+			right:3px;
+			font-size:11px;
+			line-height:13px;
+			color:#fff;
+			z-index: 99999;
+		}
+		#username__ID{
+			float:right;
+		}
+		#database_d__ID{
+			display:none;
+		}
+		#database_p__ID{
+			display:none;
+		}
+	</style>
+</div>
+<div header id=header__ID>
+    <nav id=nav__ID class="navbar navbar-expand-lg navbar-dark">
+		<div id=brand__ID>
+	        <a class="navbar-brand d-none d-lg-block" onclick="$vm.nav_load_module('panel_main_home');">
+	            <div class=large_logo__ID>
+	                <div class=large_logo_large_label__ID>
+	                    Business Portal
+	                </div>
+	                <div class=large_logo_small_label__ID>
+	                    on-demand business applications
+	                </div>
+	            </div>
+	        </a>
+	        <a class="navbar-brand d-lg-none" onclick="$vm.nav_load_module('panel_main_home');">
+	            <div class=small_logo__ID>Business Portal</div>
+	        </a>
+		</div>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbars__ID" aria-controls="navbars__ID" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbars__ID" class="navbar-collapse collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" onclick="$vm.nav_load_module('panel_main_home');"><i class="fa fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" onclick="$vm.nav_load_module('panel_main_hell-world');">Hello World</a></li>
+                <li class="nav-item dropdown" id=signin__ID>
+                    <a class="nav-link dropdown-toggle" id="nav_dropdown__ID" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> Sign In</a></a>
+                    <div class="dropdown-menu" aria-labelledby="nav_dropdown__ID">
+						<a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" id=google__ID >With your Google account</a>
+						<a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" id=facebook__ID >With your Facebook account</a>
+						<a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" onclick="$vm.nav_wappsystem_signin();">With your Wappsystem account</a>
+                    </div>
+                </li>
+				<li class="nav-item" id=signout__ID style='display:none'><a class="nav-link" onclick=$vm.nav_signout() ><i class="fa fa-user"></i> Sign Out</a></li>
+            </ul>
+			<form id=form__ID class="form-inline my-2 my-lg-0">
+				<input id=vm_system_search class="form-control mr-sm-2" type="text" placeholder="Search modules..." aria-label="Search modules..." />
+			</form>
+        </div>
+    </nav>
+    <script>
+        //---------------------------------------------
+        if($vm.user=='guest'){
+            $('a[name=signinout]').html('<i class="fa fa-user"></i> Sign In')
+            $('#username__ID').text('');
+        }
+        else{
+            $('a[name=signinout]').html('<i class="fa fa-user"></i> Sign Out')
+            $('#username__ID').text('Signed in as '+ $vm.user);
+        }
+        //---------------------------------------------
+    </script>
+    <style>
+        #header__ID{
+            background: rgba(0,0,0,0.5);
+        }
+        #header__ID a{
+            cursor:pointer;
+        }
+        #nav__ID{
+			padding:0;
+            z-index:99;
+        }
+        #navbars__ID{
+	        padding-top:30px;
+        }
+        .large_logo__ID{
+            color:#fff;
+            padding:10px 0px 10px 30px;
+        }
+        .large_logo_large_label__ID{
+            font-size:140%;
+        }
+        .large_logo_small_label__ID{
+            font-size:64%;
+        }
+        #navbars__ID{
+            padding-left:50px;
+        }
+        #form__ID{
+            padding-left:80px;
+        }
+		@media screen and (max-width:992px){
+			#nav__ID{
+	            z-index:99;
+	        }
+            #form__ID{
+		        padding-left:0px;
+	        }
+			#nav__ID{
+                padding: 3px 15px;
+			}
+            #navbars__ID{
+    	        padding-top:0px;
+                padding-left:10px;
+				background-color:#445a26;
+            }
+            .small_logo__ID{
+                color:#fff;
+                font-size: 140%;
+            }
+		}
+		/****************************/
+		#navbars__ID a:focus {
+			outline: none;
+		}
+		#navbars__ID .navbar-brand {
+			font-size: 1.1rem;
+			color: white;
+		}
+		#navbars__ID .navbar-brand.active,
+		#navbars__ID .navbar-brand:active,
+		#navbars__ID .navbar-brand:focus,
+		#navbars__ID .navbar-brand:hover {
+			color: white;
+		}
+		#navbars__ID .navbar-nav {
+			letter-spacing: 1px;
+		}
+		#navbars__ID .navbar-nav li.nav-item a.nav-link {
+			color: white;
+		}
+		#navbars__ID .navbar-nav li.nav-item a.nav-link:hover {
+			color: #18BC9C;
+			outline: none;
+		}
+		#navbars__ID .navbar-nav li.nav-item a.nav-link:active,
+		#navbars__ID .navbar-nav li.nav-item a.nav-link:focus {
+			color: white;
+		}
+		#navbars__ID .navbar-toggler {
+			font-size: 14px;
+			padding: 11px;
+			text-transform: uppercase;
+			color: white;
+			border-color: white;
+		}
+		#navbars__ID .navbar-toggler:focus,
+		#navbars__ID .navbar-toggler:hover {
+			color: white;
+			border-color: #18BC9C;
+			background-color: #18BC9C;
+		}
+		@media (min-width: 992px) {
+			#navbars__ID {
+				-webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
+				-moz-transition: padding-top 0.3s, padding-bottom 0.3s;
+				transition: padding-top 0.3s, padding-bottom 0.3s;
+			}
+			#navbars__ID .navbar-brand {
+				font-size: 2em;
+				-webkit-transition: all 0.3s;
+				-moz-transition: all 0.3s;
+				transition: all 0.3s;
+			}
+			#navbars__ID .navbar-nav > li.nav-item > a.nav-link.active {
+				color: white;
+				border-radius: 3px;
+				background: #18BC9C;
+			}
+			#navbars__ID .navbar-nav > li.nav-item > a.nav-link.active:active,
+			#navbars__ID .navbar-nav > li.nav-item > a.nav-link.active:focus,
+			#navbars__ID .navbar-nav > li.nav-item > a.nav-link.active:hover {
+				color: white;
+				background: #18BC9C;
+		  	}
+		}
+		/*********************************/
+    </style>
+</div>
+<div content-container id="content_container__ID">
+	<div id=vm_loader class="loader__ID"></div>
+	<script root-container-js>
+		$vm.root_layout_content_slot="content_container__ID";
+	</script>
+	<style root-container-css>
+		#content_container__ID{
+			position:fixed;
+			width:100%;
+            overflow:hidden;
+		}
+		#vm_loader{
+			display:none;
+			position:absolute;
+		}
+		.loader__ID {
+		  height: 4px;
+		  width: 100%;
+		  position: relative;
+		  overflow: hidden;
+		  background-color: #ddd;
+		}
+		.loader__ID:before{
+		  display: block;
+		  position: absolute;
+		  content: "";
+		  left: -200px;
+		  width: 200px;
+		  height: 4px;
+		  background-color: #2980b9;
+		  animation: loading 2s linear infinite;
+		}
+		@keyframes loading {
+		    from {left: -200px; width: 30%;}
+		    50% {width: 30%;}
+		    70% {width: 70%;}
+		    80% { left: 50%;}
+		    95% {left: 120%;}
+		    to {left: 100%;}
+		}
+	</style>
+</div>
+<div alert class="modal fade" id="vm_alert_information" tabindex="-1" role="dialog" aria-labelledby="vm_dialog" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ModalLabel">Information</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div footer id=footer__ID class="fixed-bottom text-center">
+	<span id=text__ID></span>
+	<script>
+		$vm.root_layout_footer='footer__ID';
+		//-----------------------------------------------------
+		$('#text__ID').html("Copyright © "+(new Date()).getFullYear()+", Your company name");
+		//------------------------------------
+	</script>
+	<style>
+		#footer__ID{
+			color: #fff;
+			padding: 3px;
+    		background-color: #333;
+			font:80%/18px arial;
+		}
+	</style>
+</div>
+<script main-layout-js>
+	function F__ID(){
+		var home_page_module='panel_main_home';
+        console.log((new Date().getTime()-$vm.start_time).toString()+"---"+"********************* start running code in main.html ************************");
+		//------------------------------------
+		var website_item_list_for_search=[]
+		//------------------------------------
+		var set_height=function(){
+			var header_height=$('#brand__ID').outerHeight(); $vm.header_height=header_height;
+			var footer_height=$('#footer__ID').outerHeight();
+			$vm.min_height=($(window).height()-header_height-footer_height);
+			$('#content_container__ID').css({'height':$vm.min_height});
+			$('#content_container__ID').css({'top':header_height+'px'})
+		}
+		//------------------------------------
+		set_height();
+        $vm._nn=6;
+        function checkForChanges(){
+            set_height();
+            $vm._nn--; if($vm._nn==0) return;
+            setTimeout(checkForChanges, 300);
+        }
+        checkForChanges();
+		//------------------------------------
+		window.onresize=function(e){set_height();};
+		window.onmessage=function(e){
+		    if(e.data.username!=undefined && e.data.user_id!=undefined){
+		        $vm.user=e.data.username;
+		        $vm.user_id=e.data.user_id;
+		        $VmAPI.set_token(e.data.token,e.data.api_url,e.data.username,e.data.user_id,e.data.nickname);
+		        location.reload(true);
+		    }
+		};
+		//-----------------------------------------
+		//This is the place we can add background image to body (Asynchronous)
+		var $image1 = $("<img>");
+		$image1.on('load',(function(){ $('body').css("background", "url("+$(this).attr("src")+") no-repeat bottom center"); $('body').css("background-size", "cover");  }));
+		$image1.attr("src", "background.jpg");
+		//------------------------------------
+		//over write vm alert
+		$vm.alert=function(msg){
+			$('#vm_alert_information div.modal-body').html( $('<div/>').html(msg).text() );
+			$("#vm_alert_information").modal();
+		}
+		//------------------------------------
+		var set_module_search=function(){
+			$("#vm_system_search").autocomplete({
+				minLength:0,
+				source: function(request, response) {
+					var results=$.ui.autocomplete.filter(website_item_list_for_search, request.term);
+					response(results.slice(0, 10));
+				},
+				select: function(event,ui) {
+					event.preventDefault();
+					$('.navbar-collapse').collapse('hide');
+					$("#vm_system_search").val('');
+					$("#vm_system_search").blur();
+					$('.ui-helper-hidden-accessible').html('');
+					$vm.nav_load_module(ui.item.value);
+				}
+			});
+			$("#vm_system_search").focus(function(){$("#vm_system_search").autocomplete("search","");});
+		}
+		//------------------------------------
+		var load_home_module=function(){
+            console.log((new Date().getTime()-$vm.start_time).toString()+"---"+"*********************** loading home module... **************************")
+			var a=window.location.href.split('module=');
+			if(a.length!=2)	$vm.nav_load_module(home_page_module);
+			else{
+				var name=a[1].split('&')[0];
+				if(name.length>0){
+					if($vm.module_list[name]!=undefined){
+						$vm.nav_load_module(name);
+						return;
+					}
+				};
+				alert("The module "+name+" doesn't exist!");
+			}
+		}
+		//********************************************************
+		var N=0;
+		//------------------------------------
+		var add_config_modules_to_module_list_and_start=function(url,text,prefix){
+			var config;
+			try{ config=JSON.parse(text);}
+			catch (e){ alert("Error in config file\n"+e); return; }
+			var modules=config.modules;
+			for (var property in modules) {
+			   	if($vm.module_list[prefix+property]==undefined){
+				   	$vm.module_list[prefix+property]=modules[property];
+					if($vm.module_list[prefix+property].prefix!=undefined) $vm.module_list[prefix+property].prefix=prefix+$vm.module_list[prefix+property].prefix;
+                    else $vm.module_list[prefix+property].prefix=prefix;
+					var nm=$vm.module_list[prefix+property]['name_for_search'];
+					if(nm!=""){
+						if(nm==undefined) nm=property;
+						website_item_list_for_search.push({label:nm,value:prefix+property})
+					}
+					var m_url=$vm.module_list[prefix+property].url;
+					if(m_url!=undefined && m_url[0]=='/'){
+						$vm.module_list[prefix+property].url=url.split('/index.html/')[0]+m_url;
+					}
+					else if(m_url!=undefined && m_url.substring(0,8)=='modules/'){
+						$vm.module_list[prefix+property].url=url.split('index.html/')[0]+m_url;
+					}
+			   	}
+			}
+			N--;
+			if(N==0){
+				$vm.search_list=1;
+				load_home_module();
+			}
+		}
+		//------------------------------------
+		var process_config_file=function(url,prefix){
+			$.get(url+'?_='+$vm.ver[1]+$vm.reload,function(data){
+				localStorage.setItem(url+"_txt",data);
+				localStorage.setItem(url+"_ver",$vm.ver[1]);
+				add_config_modules_to_module_list_and_start(url,data,prefix);
+			},'text').fail(function() {
+				alert( "The configuration file ("+url+") doesn't exist!" );
+			});
+		}
+		//------------------------------------
+		//read all module's info from json files
+		var panels=$vm.app_config.panels;
+		for (var property in panels){
+			var json_files=panels[property].modules;
+			N=N+json_files.length;
+		}
+		for (var property in panels){
+			$vm.module_list[property]={"url":panels[property].url}
+			var prefix=property+"_";
+			var json_files=panels[property].modules;
+			for(var i=0;i<json_files.length;i++){
+				var url=$vm.url(json_files[i]);
+				if(json_files[i].indexOf('https://')==-1) url=$vm.hosting_path+"/"+url;
+				var ver=localStorage.getItem(url+"_ver");
+				var txt=localStorage.getItem(url+"_txt");
+				if(ver!=$vm.ver[1] || txt===null || $vm.debug===true || $vm.reload!=''){
+					process_config_file(url,prefix);
+				}
+				else{
+                    add_config_modules_to_module_list_and_start(url,txt,prefix);
+                }
+			}
+		}
+		//********************************************************
+		var search_loop=setInterval(function (){
+			if($vm.js_jquery_ui==1 && $vm.search_list==1){
+				clearInterval(search_loop);
+				set_module_search();
+                console.log((new Date().getTime()-$vm.start_time).toString()+"---"+"********************* ready to search module ************************");
+			}
+		},100);
+		//------------------------------------
+	}
+</script>
+<style main-layout-css>
+    .vm_module{
+        position:absolute;
+        width:100%;
+        height:100%;
+    }
+	html,body{
+		height:100%;
+		overflow-y:hidden;
+	}
+	@keyframes vm_module_fadein {
+		from { opacity:0; }
+		to {opacity:1;}
+	}
+    @keyframes vm_module_slide_in {
+		from { margin-top:50%; }
+		to {margin-top:0;}
+	}
+    @keyframes vm_module_slide_out {
+        from { margin-top:0; }
+		to {margin-top:-50%;}
+	}
+    .ui-autocomplete.ui-menu{font-size:12px}
+	.ui-menu-item .ui-menu-item-wrapper:hover{
+		font-weight:normal;
+	}
+</style>
