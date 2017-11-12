@@ -21,10 +21,9 @@
         	if(window.location.toString().indexOf('_d=3')!=-1){
         		$vm.reload=new Date().getTime().toString();
         	}
-			$vm.ver=["1","1","1"]
-			$vm.version=$vm.ver[0];
 			//--------------------------------------------------------
 			var load_config_and_init=function(){
+				$vm.version=$vm.ver[0];
 				var url=$vm.hosting_path+"/index.json";
 				var ver=localStorage.getItem(url+"_ver");
 				var txt=localStorage.getItem(url+"_txt");
@@ -110,7 +109,7 @@
 				$.getScript('https://apis.google.com/js/plusone.js');
 			}
 			//********************************************************
-			load_config_and_init();
+			$.get('https://www.vmiis.com/version.html',function(v){ $vm.ver=v.trim().split(','); $.ajaxSetup({cache:true}); load_config_and_init(); });
 			//********************************************************
 		</script>
 	</head>
