@@ -312,7 +312,7 @@
 		//This is the place we can add background image to body (Asynchronous)
 		var $image1 = $("<img>");
 		$image1.on('load',(function(){ $('body').css("background", "url("+$(this).attr("src")+") no-repeat bottom center"); $('body').css("background-size", "cover");  }));
-		$image1.attr("src", "background.jpg");
+		$image1.attr("src", "images/background.jpg");
 		//------------------------------------
 		//over write vm alert
 		$vm.alert=function(msg){
