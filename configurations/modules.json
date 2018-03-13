@@ -1,7 +1,0 @@
-{
-    "modules":
-	{
-		"home":	          {"url":"https://vmiis.github.io/modular-distributed-web-application/modules/static/basic/home.html","name_for_search":"Home page","color":"#fff"},
-		"hell-world":	  {"url":"modules/task/hello-world.html","name_for_search":"Hello World"}
-	}
-}
